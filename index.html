@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta name="description" content="张婧20岁生日纪念网站">
+  <title>张婧 · 20岁生日快乐</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/photos.css">
+  <link rel="stylesheet" href="css/fireworks.css">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-dots">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- 顶部进度条 -->
+  <div id="progress-bar"></div>
+
+  <!-- 右侧导航点 -->
+  <nav id="nav-dots">
+    <div class="nav-dot active" data-target="part-01" data-label="PART 01 · 烟花开场"></div>
+    <div class="nav-dot" data-target="part-02" data-label="PART 02 · 五年回忆"></div>
+    <div class="nav-dot" data-target="part-03" data-label="PART 03 · 吹蜡烛"></div>
+    <div class="nav-dot" data-target="part-04" data-label="PART 04 · 生日信"></div>
+    <div class="nav-dot" data-target="part-05" data-label="PART 05 · 未来"></div>
+  </nav>
+
+  <!-- 生日模式标识 -->
+  <div class="birthday-badge" id="birthday-badge">今天是张婧的生日</div>
+
+  <!-- 音乐播放器 -->
+  <div id="music-player" class="collapsed">
+    <button class="music-btn" id="music-toggle" aria-label="播放/暂停音乐">▶</button>
+    <div class="music-info">
+      <span class="title">点击播放音乐</span>
+      <span class="artist">将音乐放到 assets/audio/</span>
+    </div>
+    <input type="range" class="music-volume-slider" id="music-volume" min="0" max="100" value="60">
+  </div>
+
+  <!-- 手动测试生日模式 -->
+  <button class="test-mode-btn" id="test-mode-btn">🎂 测试生日模式</button>
+
+  <!-- 场景过渡遮罩 -->
+  <div class="scene-transition" id="scene-transition"></div>
+
+  <!-- ========== 主内容 ========== -->
+  <main>
+
+    <!-- ============================================ -->
+    <!-- PART 01: 🎆 烟花开场                          -->
+    <!-- ============================================ -->
+    <section id="part-01" class="part part-opening">
+      <canvas id="fireworks-canvas"></canvas>
+      <div class="fireworks-glow" id="fireworks-glow"></div>
+      <div class="opening-sequence" id="opening-sequence">
+        <!-- 由 main.js 动态填充开场文案序列 -->
+      </div>
+      <div class="opening-scroll-hint" id="scroll-hint">
+        向下滚动 ↓
+        <span class="arrow">↓</span>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PART 02: ❤️ 五年回忆 / 爱心照片墙              -->
+    <!-- ============================================ -->
+    <section id="part-02" class="part part-memories">
+
+      <!-- 引导文案 -->
+      <div class="memories-intro" id="memories-intro">
+        <!-- 由 main.js 动态填充 -->
+      </div>
+
+      <!-- STAGE 01: 小时候 -->
+      <div class="stage" id="stage-childhood" data-stage="childhood">
+        <div class="stage-subtitle">CHILDHOOD</div>
+        <div class="photo-wrapper" data-display="hero-vintage"></div>
+      </div>
+
+      <!-- STAGE 02: 高中 -->
+      <div class="stage" id="stage-highschool" data-stage="highschool">
+        <div class="stage-subtitle">HIGH SCHOOL</div>
+        <!-- photos.js 会根据 displayMode 渲染 -->
+      </div>
+
+      <!-- STAGE 03: 疫情 -->
+      <div class="stage" id="stage-pandemic" data-stage="pandemic">
+        <!-- 无 subtitle -->
+      </div>
+
+      <!-- STAGE 04: 毕业 -->
+      <div class="stage" id="stage-graduation" data-stage="graduation">
+      </div>
+
+      <!-- STAGE 05: 大学 / 第一个寒假 -->
+      <div class="stage" id="stage-university" data-stage="university">
+        <div class="stage-subtitle">UNIVERSITY</div>
+      </div>
+
+      <!-- STAGE 06: 搞怪档案 -->
+      <div class="stage" id="stage-archive" data-stage="archive">
+        <div class="archive-container">
+          <div class="archive-header" id="archive-header">
+            <div class="archive-title">ARCHIVED FILE</div>
+            <div class="archive-warning">部分历史影像不建议公开。</div>
+            <div class="archive-click-hint">点击查看 →</div>
+          </div>
+          <div class="archive-items" id="archive-items">
+            <!-- 由 interactions.js 填充 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 06.5: 你和咪咪 -->
+      <div class="stage" id="stage-mimi" data-stage="mimi">
+        <!-- 由 photos.js 填充 -->
+      </div>
+
+      <!-- STAGE 07: 日常 -->
+      <div class="stage" id="stage-daily" data-stage="daily">
+        <div class="polaroid-wall" id="daily-photos">
+          <!-- 由 photos.js 填充 -->
+        </div>
+      </div>
+
+      <!-- STAGE 08: 成都 -->
+      <div class="stage" id="stage-chengdu" data-stage="chengdu">
+        <div class="stage-subtitle">SOMEWHERE WE WENT</div>
+        <div class="gallery-grid" id="chengdu-gallery">
+          <!-- 由 photos.js 填充 -->
+        </div>
+      </div>
+
+      <!-- STAGE 09: 北京 -->
+      <div class="stage" id="stage-beijing" data-stage="beijing">
+        <div class="stage-subtitle">ANOTHER MEMORY</div>
+        <div class="polaroid-wall" id="beijing-photos">
+          <!-- 由 photos.js 填充 -->
+        </div>
+      </div>
+
+      <!-- STAGE 10: 来常州找你 -->
+      <div class="stage" id="stage-changzhou" data-stage="changzhou">
+        <div class="polaroid-wall" id="changzhou-photos">
+          <!-- 由 photos.js 填充 -->
+        </div>
+      </div>
+
+      <!-- STAGE 11: 情感大师 / 聊天记录 -->
+      <div class="stage" id="stage-chat" data-stage="chat">
+        <div class="chat-container">
+          <div class="chat-header">CHAT HISTORY</div>
+          <div class="chat-messages" id="chat-messages">
+            <!-- 由 interactions.js 填充 -->
+          </div>
+          <div class="chat-ending" id="chat-ending">
+            就这样，听我叭叭叭了三年。
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PART 03: 🎂 吹蜡烛 / 20岁许愿                 -->
+    <!-- ============================================ -->
+    <section id="part-03" class="part part-candles">
+      <div class="part-label">PART 03 · 20岁许愿</div>
+
+      <div class="candle-number" id="candle-number">20</div>
+
+      <div class="candle-scene" id="candle-scene">
+        <div class="candles-row" id="candles-row">
+          <!-- 由 birthday.js 动态生成蜡烛 -->
+        </div>
+        <div class="cake"></div>
+      </div>
+
+      <div class="candle-prompt" id="candle-prompt"></div>
+
+      <div class="candle-after" id="candle-after">
+        <!-- 吹灭后显示 -->
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PART 04: 💌 给张婧的20岁生日信                 -->
+    <!-- ============================================ -->
+    <section id="part-04" class="part part-letter">
+      <div class="part-label">PART 04 · 生日信</div>
+
+      <div class="letter-container">
+        <div class="letter-header">
+          <h2>LETTER FOR ZHANG JING</h2>
+          <div class="icon">💌</div>
+        </div>
+
+        <!-- 信件章节由 interactions.js 动态生成 -->
+        <div id="letter-chapters"></div>
+      </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- PART 05: 📝 未来 / 签名墙                     -->
+    <!-- ============================================ -->
+    <section id="part-05" class="part part-future">
+      <div class="part-label">PART 05 · 未来</div>
+
+      <!-- 未来引导 -->
+      <div class="future-intro" id="future-intro">
+        <!-- 由 interactions.js 填充 -->
+      </div>
+
+      <!-- 未来目的地 -->
+      <div class="future-destination" id="future-destination">
+        <div class="label">FUTURE DESTINATION</div>
+        <div class="name">待解锁</div>
+        <div class="status">未来真正一起去了以后，可以替换成真实照片</div>
+      </div>
+
+      <!-- 19 → 20 数字动画 -->
+      <div class="number-animation" id="number-animation">
+        <span class="number-display" id="number-from">19</span>
+        <span class="number-arrow">→</span>
+        <span class="number-display" id="number-to">20</span>
+      </div>
+
+      <!-- 结尾文案 -->
+      <div class="ending-texts" id="ending-texts">
+        <!-- 由 interactions.js 填充 -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== JavaScript ========== -->
+  <script src="js/content-map.js"></script>
+  <script src="js/lunar.js"></script>
+  <script src="js/fireworks.js"></script>
+  <script src="js/photos.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/birthday.js"></script>
+  <script src="js/interactions.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,180 @@
+/* ========== animations.css - 动画定义 ========== */
+
+/* --- 文字逐字出现 --- */
+@keyframes typewriterChar {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.typewriter-char {
+  display: inline-block;
+  opacity: 0;
+  animation: typewriterChar 0.05s forwards;
+}
+
+/* --- 浮动粒子 --- */
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 0; }
+  20% { opacity: 0.8; }
+  100% { transform: translateY(-120px) scale(0.3); opacity: 0; }
+}
+
+/* --- 猜对/猜错动画 --- */
+@keyframes guessCorrect {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.15); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+@keyframes guessWrong {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-3px); }
+}
+
+/* --- 星光闪烁 --- */
+@keyframes sparkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--gold-light);
+  border-radius: 50%;
+  animation: sparkle 2s infinite;
+  pointer-events: none;
+}
+
+/* --- 淡入上移 --- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 缩放淡入 --- */
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* --- 左滑入 --- */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* --- 右滑入 --- */
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(40px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* --- 老照片质感浮现 --- */
+@keyframes vintagePhotoIn {
+  0% { opacity: 0; transform: scale(1.1) rotate(-2deg); filter: sepia(1) blur(8px); }
+  60% { opacity: 0.8; filter: sepia(0.5) blur(2px); }
+  100% { opacity: 1; transform: scale(1) rotate(0); filter: sepia(0.2) blur(0); }
+}
+
+/* --- 拍立得掉落 --- */
+@keyframes polaroidDrop {
+  0% { opacity: 0; transform: translateY(-60px) rotate(var(--rot, -5deg)) scale(0.9); }
+  60% { transform: translateY(5px) rotate(var(--rot, -5deg)) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) rotate(var(--rot, -5deg)) scale(1); }
+}
+
+/* --- 心跳脉冲 --- */
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* --- 渐变光晕 --- */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(232, 180, 184, 0.2); }
+  50% { box-shadow: 0 0 40px rgba(232, 180, 184, 0.4); }
+}
+
+/* --- 数字翻滚 --- */
+@keyframes numberFlip {
+  0% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-30px); opacity: 0; }
+  51% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* --- 聊天气泡弹出 --- */
+@keyframes bubblePop {
+  0% { opacity: 0; transform: scale(0.6) translateY(10px); }
+  60% { transform: scale(1.05) translateY(-2px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.bubble-anim {
+  animation: bubblePop 0.5s var(--ease-soft) forwards;
+}
+
+/* --- 档案揭开 --- */
+@keyframes archiveReveal {
+  0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  100% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+}
+
+/* --- 文字模糊到清晰 --- */
+@keyframes blurToClear {
+  0% { opacity: 0; filter: blur(10px); }
+  100% { opacity: 1; filter: blur(0); }
+}
+
+/* --- 背景视差缓慢移动 --- */
+@keyframes parallaxDrift {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50px); }
+}
+
+/* --- 蜡烛星光粒子 --- */
+@keyframes wishParticle {
+  0% { transform: translate(0, 0) scale(0); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translate(var(--tx, 30px), var(--ty, -80px)) scale(1); opacity: 0; }
+}
+
+.wish-particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--gold-light);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: wishParticle 2s ease-out forwards;
+  box-shadow: 0 0 8px var(--gold);
+}
+
+/* --- 分隔线展开 --- */
+@keyframes lineExpand {
+  0% { width: 0; opacity: 0; }
+  100% { width: 60px; opacity: 1; }
+}
+
+.section-divider {
+  width: 0;
+  height: 1px;
+  background: var(--border-soft);
+  margin: 40px auto;
+  animation: lineExpand 1.5s var(--ease-out) forwards;
+}
+
+/* --- 颗粒纹理叠加 --- */
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+  z-index: 5;
+}

@@ -1,0 +1,996 @@
+/* ========== photos.css - 照片墙/相册/展示样式（增强版） ========== */
+
+/* --- 照片占位符 --- */
+.photo-placeholder {
+  background: linear-gradient(135deg, var(--bg-cream-warm) 0%, var(--bg-cream) 50%, var(--bg-paper) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 12px;
+  text-align: center;
+  border: 2px dashed var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  min-height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-placeholder::before {
+  content: '🖼️';
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+  opacity: 0.4;
+}
+
+.photo-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(212, 165, 116, 0.03) 20px, rgba(212, 165, 116, 0.03) 40px);
+  pointer-events: none;
+}
+
+.photo-placeholder .filename {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--text-muted);
+  word-break: break-all;
+  max-width: 90%;
+}
+
+/* --- 图片懒加载状态 --- */
+.lazy-img {
+  opacity: 0;
+  transition: opacity 1s var(--ease-out), transform 0.6s var(--ease-soft);
+}
+
+.lazy-img.loaded {
+  opacity: 1;
+}
+
+/* ========== Hero 大图模式 ========== */
+.photo-hero {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  cursor: pointer;
+}
+
+.photo-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.15) 100%);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-soft);
+}
+
+.photo-hero:hover::before {
+  opacity: 1;
+}
+
+.photo-hero img,
+.photo-hero .photo-placeholder {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 1.2s var(--ease-soft);
+}
+
+.photo-hero:hover img {
+  transform: scale(1.06);
+}
+
+.photo-hero .photo-placeholder {
+  height: auto;
+  min-height: 200px;
+}
+
+/* Hero 光晕装饰 */
+.photo-hero::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(232, 180, 184, 0.2), transparent, rgba(212, 165, 116, 0.15));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-soft);
+}
+
+.photo-hero:hover::after {
+  opacity: 1;
+}
+
+/* ========== Hero 老照片质感 ========== */
+.photo-hero-vintage {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  padding: 20px 20px 28px;
+  background: linear-gradient(135deg, #faf4e8 0%, #f5ede0 50%, #ede0d0 100%);
+  border-radius: var(--radius-sm);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    inset 0 0 60px rgba(180, 150, 120, 0.08);
+}
+
+/* 老照片边角磨损 */
+.photo-hero-vintage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius-sm);
+  background: 
+    radial-gradient(ellipse at top left, rgba(160, 130, 100, 0.15), transparent 40%),
+    radial-gradient(ellipse at bottom right, rgba(160, 130, 100, 0.1), transparent 40%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.photo-hero-vintage img,
+.photo-hero-vintage .photo-placeholder {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 3px;
+  filter: sepia(0.25) contrast(0.92) brightness(1.05) saturate(0.85);
+  transition: filter 1s var(--ease-soft), transform 1.2s var(--ease-soft);
+}
+
+.photo-hero-vintage:hover img {
+  filter: sepia(0.1) contrast(1) brightness(1.08) saturate(0.95);
+  transform: scale(1.03);
+}
+
+.photo-hero-vintage .vintage-caption {
+  font-family: var(--font-script);
+  font-size: 16px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 16px;
+  letter-spacing: 0.5px;
+}
+
+/* 老照片角落装饰 */
+.photo-hero-vintage .vintage-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(180, 150, 120, 0.2);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.photo-hero-vintage .vintage-corner.tl { top: 6px; left: 6px; border-right: none; border-bottom: none; }
+.photo-hero-vintage .vintage-corner.tr { top: 6px; right: 6px; border-left: none; border-bottom: none; }
+.photo-hero-vintage .vintage-corner.bl { bottom: 24px; left: 6px; border-right: none; border-top: none; }
+.photo-hero-vintage .vintage-corner.br { bottom: 24px; right: 6px; border-left: none; border-top: none; }
+
+/* ========== 全屏照片 ========== */
+.photo-fullscreen {
+  width: 100vw;
+  max-width: 100%;
+  margin-left: calc(50% - 50vw);
+  position: relative;
+  overflow: hidden;
+}
+
+.photo-fullscreen img,
+.photo-fullscreen .photo-placeholder {
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: contain;
+  transition: transform 1.5s var(--ease-soft);
+}
+
+.photo-fullscreen:hover img {
+  transform: scale(1.04);
+}
+
+.photo-fullscreen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 50%, rgba(250, 246, 240, 0.6) 100%);
+  pointer-events: none;
+}
+
+/* 全屏照片装饰边框线 */
+.photo-fullscreen::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ========== 普通照片 ========== */
+.photo-normal {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  cursor: pointer;
+}
+
+.photo-normal img,
+.photo-normal .photo-placeholder {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 1s var(--ease-soft);
+}
+
+.photo-normal:hover img {
+  transform: scale(1.05);
+}
+
+/* ========== 拍立得风格 ========== */
+.photo-polaroid {
+  background: white;
+  padding: 14px 14px 52px;
+  border-radius: 3px;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.06);
+  display: inline-block;
+  position: relative;
+  transition: transform 0.5s var(--ease-soft), box-shadow 0.5s var(--ease-soft);
+  cursor: pointer;
+}
+
+.photo-polaroid img,
+.photo-polaroid .photo-placeholder {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 2px;
+  transition: filter 0.5s var(--ease-soft);
+}
+
+.photo-polaroid:hover {
+  transform: translateY(-10px) rotate(0deg) scale(1.04) !important;
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.18),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+
+.photo-polaroid:hover img {
+  filter: brightness(1.05) saturate(1.1);
+}
+
+.photo-polaroid .polaroid-date {
+  font-family: var(--font-script);
+  font-size: 15px;
+  color: var(--text-muted);
+  text-align: center;
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+}
+
+/* 拍立得胶带装饰 */
+.photo-polaroid::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 50px;
+  height: 18px;
+  background: rgba(212, 165, 116, 0.25);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+/* 拍立得墙布局 */
+.polaroid-wall {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px;
+  padding: 30px 0;
+  position: relative;
+}
+
+.polaroid-wall .photo-polaroid {
+  width: 220px;
+  animation: polaroidFloat 4s ease-in-out infinite;
+}
+
+.polaroid-wall .photo-polaroid:nth-child(1) { animation-delay: 0s; }
+.polaroid-wall .photo-polaroid:nth-child(2) { animation-delay: 1s; }
+.polaroid-wall .photo-polaroid:nth-child(3) { animation-delay: 2s; }
+.polaroid-wall .photo-polaroid:nth-child(4) { animation-delay: 0.5s; }
+.polaroid-wall .photo-polaroid:nth-child(5) { animation-delay: 1.5s; }
+.polaroid-wall .photo-polaroid:nth-child(6) { animation-delay: 2.5s; }
+
+@keyframes polaroidFloat {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, -3deg)); }
+  50% { transform: translateY(-6px) rotate(var(--rot, -3deg)); }
+}
+
+/* ========== 旅行相册 ========== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.gallery-grid .gallery-item {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-soft), box-shadow 0.4s var(--ease-soft);
+}
+
+.gallery-grid .gallery-item img,
+.gallery-grid .gallery-item .photo-placeholder {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 1s var(--ease-soft);
+}
+
+.gallery-grid .gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  z-index: 5;
+}
+
+.gallery-grid .gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+/* 相册 hover 遮罩 */
+.gallery-grid .gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0, 0, 0, 0.2) 100%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.gallery-grid .gallery-item:hover::after {
+  opacity: 1;
+}
+
+/* 第一张大图 */
+.gallery-grid .gallery-item:first-child {
+  grid-column: span 2;
+}
+
+.gallery-grid .gallery-item:first-child img,
+.gallery-grid .gallery-item:first-child .photo-placeholder {
+  width: 100%;
+  height: auto;
+}
+
+/* ========== 异地合照（左右交错） ========== */
+.photo-duo-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 2rem 0;
+}
+
+.photo-duo-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--rose-light) 0,
+    var(--rose-light) 8px,
+    transparent 8px,
+    transparent 16px
+  );
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.photo-duo-container::after {
+  content: '1000+ km';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-soft);
+  padding: 0.3rem 1rem;
+  font-size: 0.85rem;
+  color: var(--rose-deep);
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  font-style: italic;
+  letter-spacing: 0.1em;
+  z-index: 1;
+  white-space: nowrap;
+}
+
+.photo-duo-left,
+.photo-duo-right {
+  position: relative;
+  width: 42%;
+  z-index: 2;
+}
+
+.photo-duo-left {
+  transform: rotate(-3deg);
+  margin-top: -1rem;
+}
+
+.photo-duo-right {
+  transform: rotate(3deg);
+  margin-bottom: -1rem;
+}
+
+.photo-duo-left img,
+.photo-duo-right img,
+.photo-duo-left .photo-placeholder,
+.photo-duo-right .photo-placeholder {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 6px solid #fff;
+  transition: transform 0.6s var(--ease-soft), box-shadow 0.6s var(--ease-soft);
+}
+
+.photo-duo-left:hover img,
+.photo-duo-right:hover img {
+  transform: scale(1.03);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.photo-duo-caption {
+  text-align: center;
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  letter-spacing: 0.15em;
+}
+
+.photo-duo-left .photo-duo-caption {
+  text-align: left;
+  padding-left: 0.5rem;
+}
+
+.photo-duo-right .photo-duo-caption {
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+/* ========== 隐藏档案彩蛋 ========== */
+.archive-container {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.archive-header {
+  background: linear-gradient(135deg, rgba(20, 18, 26, 0.95) 0%, rgba(30, 26, 38, 0.95) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 32px 40px;
+  cursor: pointer;
+  transition: all 0.5s var(--ease-soft);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 档案扫描线效果 */
+.archive-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rose), transparent);
+  animation: scanLine 3s linear infinite;
+}
+
+@keyframes scanLine {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100px); }
+}
+
+.archive-header:hover {
+  border-color: var(--rose);
+  box-shadow: 0 0 40px rgba(232, 180, 184, 0.2);
+  transform: translateY(-2px);
+}
+
+.archive-header .archive-title {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 4px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.archive-header .archive-warning {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  margin-top: 12px;
+  font-family: var(--font-serif);
+}
+
+.archive-header .archive-click-hint {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-top: 16px;
+  font-style: italic;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+}
+
+.archive-header:hover .archive-click-hint {
+  opacity: 1;
+}
+
+.archive-items {
+  margin-top: 24px;
+  display: none;
+}
+
+.archive-items.revealed {
+  display: block;
+  animation: archiveReveal 0.8s var(--ease-out) forwards;
+}
+
+.archive-item {
+  background: var(--bg-paper);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-soft);
+}
+
+.archive-item:hover {
+  transform: translateX(6px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* 档案条码装饰 */
+.archive-item::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  width: 40px;
+  height: 12px;
+  background: repeating-linear-gradient(90deg, var(--text-dark) 0 2px, transparent 2px 4px);
+  opacity: 0.2;
+}
+
+.archive-item .archive-number {
+  font-family: var(--font-serif);
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.archive-item .archive-photo {
+  width: 140px;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.archive-item .archive-photo img,
+.archive-item .archive-photo .photo-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  filter: contrast(0.95);
+  transition: filter 0.5s;
+}
+
+.archive-item:hover .archive-photo img {
+  filter: contrast(1) saturate(1.1);
+}
+
+.archive-item .archive-label {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+/* ========== 聊天气泡 ========== */
+.chat-container {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 32px 16px;
+  position: relative;
+}
+
+.chat-header {
+  text-align: center;
+  margin-bottom: 32px;
+  font-family: var(--font-serif);
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 4px;
+}
+
+.chat-header::before,
+.chat-header::after {
+  content: '—';
+  margin: 0 12px;
+  opacity: 0.4;
+}
+
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 320px;
+  padding: 20px 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 100%);
+  border-radius: var(--radius-md);
+  position: relative;
+}
+
+/* 聊天框装饰 */
+.chat-messages::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rose), transparent);
+  opacity: 0.3;
+}
+
+.chat-bubble {
+  max-width: 75%;
+  padding: 14px 20px;
+  border-radius: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0;
+  position: relative;
+  word-wrap: break-word;
+  word-break: break-word;
+  transition: transform 0.3s var(--ease-soft);
+}
+
+.chat-bubble:hover {
+  transform: scale(1.02);
+}
+
+.chat-bubble.me {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #95ec69 0%, #7fd55a 100%);
+  color: #000;
+  border-radius: 20px 20px 4px 20px;
+  box-shadow: 0 2px 8px rgba(149, 236, 105, 0.2);
+}
+
+.chat-bubble.zhangjing {
+  align-self: flex-start;
+  background: white;
+  color: var(--text-dark);
+  border-radius: 20px 20px 20px 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* 聊天气泡小尾巴 */
+.chat-bubble.me::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: -6px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 10px 10px;
+  border-color: transparent transparent transparent #7fd55a;
+}
+
+.chat-bubble.zhangjing::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -6px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 10px 10px 0;
+  border-color: transparent white transparent transparent;
+}
+
+.chat-bubble.show {
+  animation: bubblePop 0.5s var(--ease-soft) forwards;
+}
+
+/* 打字指示器 */
+.chat-typing {
+  align-self: flex-start;
+  display: flex;
+  gap: 4px;
+  padding: 14px 20px;
+  background: white;
+  border-radius: 20px 20px 20px 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.chat-typing.show {
+  opacity: 1;
+}
+
+.chat-typing span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: typingDot 1.4s infinite ease-in-out;
+}
+
+.chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingDot {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+.chat-ending {
+  text-align: center;
+  margin-top: 36px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  color: var(--text-dark);
+  opacity: 0;
+  transition: opacity 1.2s var(--ease-out);
+  position: relative;
+  padding: 24px 0;
+}
+
+.chat-ending::before,
+.chat-ending::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40px;
+  height: 1px;
+  background: var(--border-soft);
+}
+
+.chat-ending::before { left: 10%; }
+.chat-ending::after { right: 10%; }
+
+.chat-ending.visible {
+  opacity: 1;
+}
+
+/* ========== 小时候互动猜人 ========== */
+.childhood-interactive {
+  text-align: center;
+  margin-bottom: 40px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s var(--ease-out);
+}
+
+.childhood-interactive.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.childhood-interactive .guess-question {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  color: var(--rose-deep);
+  margin-bottom: 8px;
+}
+
+.childhood-interactive .guess-subtext {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.childhood-interactive .guess-options {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.childhood-interactive .guess-btn {
+  padding: 10px 24px;
+  border: 1.5px solid var(--border-soft);
+  border-radius: 24px;
+  background: var(--bg-cream);
+  color: var(--text-dark);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-soft);
+}
+
+.childhood-interactive .guess-btn:hover {
+  border-color: var(--rose);
+  color: var(--rose-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(232, 180, 184, 0.15);
+}
+
+.childhood-interactive .guess-btn.correct {
+  background: linear-gradient(135deg, var(--rose) 0%, var(--rose-deep) 100%);
+  color: white;
+  border-color: var(--rose);
+  animation: guessCorrect 0.6s var(--ease-soft) forwards;
+}
+
+.childhood-interactive .guess-btn.wrong {
+  opacity: 0.4;
+  pointer-events: none;
+  animation: guessWrong 0.4s ease;
+}
+
+.childhood-interactive .guess-btn:disabled {
+  cursor: default;
+}
+
+.childhood-interactive .guess-reveal {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--rose-deep);
+  margin-top: 20px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.6s var(--ease-soft);
+}
+
+.childhood-interactive .guess-reveal.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.childhood-interactive .guess-reveal::before {
+  content: '✦';
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  opacity: 0.5;
+}
+
+/* 猜对后隐藏选项 */
+.childhood-interactive.solved .guess-options {
+  animation: inputFadeOut 0.6s var(--ease-soft) forwards;
+}
+
+.childhood-interactive.solved .guess-subtext {
+  animation: inputFadeOut 0.4s var(--ease-soft) forwards;
+}
+
+/* ========== 照片描述文字 ========== */
+.photo-caption {
+  font-family: var(--font-serif);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--text-dark);
+  text-align: center;
+  margin-top: 20px;
+  line-height: 2;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 1s var(--ease-out);
+  position: relative;
+}
+
+.photo-caption.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.photo-caption::before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: var(--rose);
+  margin: 0 auto 16px;
+  opacity: 0.6;
+}
+
+/* ========== 照片容器（通用） ========== */
+.photo-wrapper {
+  margin: 40px 0;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1.2s var(--ease-out), transform 1.2s var(--ease-out);
+  position: relative;
+}
+
+.photo-wrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.photo-wrapper.visible.photo-hero-vintage {
+  animation: vintagePhotoIn 1.8s var(--ease-out) forwards;
+}
+
+.photo-wrapper.visible.photo-polaroid {
+  animation: polaroidDrop 1s var(--ease-soft) forwards;
+}
+
+/* 照片周围装饰星星 */
+.photo-wrapper .photo-decor {
+  position: absolute;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 1s var(--ease-out) 0.5s;
+  pointer-events: none;
+}
+
+.photo-wrapper.visible .photo-decor {
+  opacity: 0.4;
+}
+
+.photo-decor.tl { top: -10px; left: -10px; }
+.photo-decor.tr { top: -10px; right: -10px; }
+.photo-decor.bl { bottom: -10px; left: -10px; }
+.photo-decor.br { bottom: -10px; right: -10px; }

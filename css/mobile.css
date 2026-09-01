@@ -1,0 +1,378 @@
+/* ========== mobile.css - 移动端适配 ========== */
+
+/* 移动端断点：768px 以下 */
+@media screen and (max-width: 768px) {
+  :root {
+    --space-section: 60px;
+    --container-max: 100%;
+  }
+
+  /* --- 基础 --- */
+  body {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  /* --- 导航点 --- */
+  #nav-dots {
+    right: 12px;
+    gap: 12px;
+  }
+
+  .nav-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .nav-dot::after {
+    display: none;
+  }
+
+  /* --- 音乐播放器 --- */
+  #music-player {
+    bottom: 16px;
+    right: 16px;
+    padding: 8px 16px 8px 8px;
+    gap: 8px;
+  }
+
+  .music-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .music-info {
+    font-size: 11px;
+    max-width: 100px;
+  }
+
+  .music-volume-slider {
+    display: none;
+  }
+
+  /* --- 测试按钮 --- */
+  .test-mode-btn {
+    bottom: 16px;
+    left: 16px;
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+
+  /* --- PART 01 开场 --- */
+  .opening-text {
+    font-size: 1rem;
+  }
+
+  .opening-input-box {
+    max-width: 300px;
+  }
+
+  .opening-input-wrapper {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .opening-input-field {
+    width: 180px;
+    font-size: 15px;
+    padding: 10px 20px;
+  }
+
+  .opening-input-field:focus {
+    width: 190px;
+  }
+
+  .opening-input-btn {
+    padding: 10px 24px;
+    font-size: 13px;
+  }
+
+  .opening-scroll-hint {
+    bottom: 24px;
+  }
+
+  /* --- Stage 间距 --- */
+  .stage {
+    padding: 50px 16px;
+  }
+
+  .stage-text {
+    font-size: 1.1rem;
+    line-height: 2;
+  }
+
+  /* --- 照片 hero --- */
+  .photo-hero {
+    border-radius: var(--radius-md);
+  }
+
+  .photo-hero-vintage {
+    padding: 10px;
+  }
+
+  /* --- 全屏照片 --- */
+  .photo-fullscreen img,
+  .photo-fullscreen .photo-placeholder {
+    height: 50vh;
+    min-height: 280px;
+  }
+
+  /* --- 拍立得 --- */
+  .polaroid-wall {
+    gap: 16px;
+  }
+
+  .polaroid-wall .photo-polaroid {
+    width: 150px;
+    padding: 8px 8px 36px;
+  }
+
+  .photo-polaroid .polaroid-date {
+    font-size: 12px;
+    bottom: 8px;
+  }
+
+  /* --- 旅行相册 --- */
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  /* --- 隐藏档案 --- */
+  .archive-item {
+    flex-direction: column;
+    text-align: center;
+    padding: 12px;
+  }
+
+  .archive-item .archive-photo {
+    width: 100%;
+  }
+
+  /* --- 聊天气泡 --- */
+  .chat-container {
+    padding: 16px 12px;
+  }
+
+  .chat-bubble {
+    max-width: 80%;
+    font-size: 14px;
+    padding: 10px 14px;
+  }
+
+  .chat-messages {
+    min-height: 240px;
+  }
+
+  /* --- 吹蜡烛 --- */
+  .candle-number {
+    font-size: 4rem;
+  }
+
+  .cake {
+    width: 160px;
+    height: 80px;
+  }
+
+  .candles-row {
+    gap: 14px;
+    top: -42px;
+  }
+
+  .candle {
+    width: 8px;
+    height: 32px;
+  }
+
+  .candle-flame {
+    width: 10px;
+    height: 15px;
+    top: -14px;
+  }
+
+  /* --- 生日信 --- */
+  .part-letter {
+    padding: 50px 16px;
+  }
+
+  .letter-chapter {
+    margin-bottom: 32px;
+  }
+
+  .letter-chapter-line {
+    font-size: 1.05rem;
+    line-height: 2.2;
+  }
+
+  .letter-flashback {
+    gap: 8px;
+  }
+
+  .letter-flashback-tag {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+
+  .letter-easter-egg {
+    padding: 16px 20px;
+  }
+
+  /* --- 未来/结尾 --- */
+  .future-destination {
+    padding: 30px 24px;
+    margin: 16px 8px;
+  }
+
+  .number-display {
+    font-size: 4.5rem;
+  }
+
+  .number-arrow {
+    font-size: 1.8rem;
+    margin: 0 8px;
+  }
+
+  .ending-text {
+    font-size: 1.05rem;
+  }
+}
+
+/* 小屏手机（375px 以下） */
+@media screen and (max-width: 375px) {
+  .opening-name {
+    font-size: 2.2rem;
+  }
+
+  .stage-text {
+    font-size: 1rem;
+  }
+
+  .polaroid-wall .photo-polaroid {
+    width: 130px;
+  }
+
+  .chat-bubble {
+    max-width: 85%;
+    font-size: 13px;
+  }
+
+  .candle-number {
+    font-size: 3.5rem;
+  }
+}
+
+/* 横屏手机优化 */
+@media screen and (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+  .part-opening {
+    min-height: 100vh;
+  }
+
+  .opening-sequence {
+    transform: scale(0.85);
+  }
+
+  .memories-intro {
+    min-height: 100vh;
+    padding: 40px 16px;
+  }
+
+  .part-candles {
+    min-height: 100vh;
+    padding: 30px 16px;
+  }
+
+  .candle-scene {
+    transform: scale(0.8);
+    margin: 20px 0;
+  }
+}
+
+/* 防止横向滚动 */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* iOS Safari 安全区域 */
+@supports (padding: env(safe-area-inset-bottom)) {
+  #music-player {
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  .test-mode-btn {
+    bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+}
+
+/* 触摸优化 */
+@media (hover: none) and (pointer: coarse) {
+  .photo-polaroid:hover {
+    transform: none !important;
+  }
+
+  .gallery-grid .gallery-item:hover {
+    transform: none;
+  }
+
+  .nav-dot:hover::after {
+    opacity: 0;
+  }
+}
+
+/* 高分辨率屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .photo-placeholder {
+    border-width: 1.5px;
+  }
+}
+
+/* 打印样式（防止意外打印时混乱） */
+@media print {
+  #nav-dots, #music-player, #progress-bar, #fireworks-canvas,
+  .opening-scroll-hint, .test-mode-btn, .birthday-badge {
+    display: none !important;
+  }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .sparkle, .candle-flame {
+    animation: none !important;
+  }
+
+  /* --- 异地合照 --- */
+  .photo-duo-container {
+    padding: 1rem 0;
+    margin: 1.5rem auto;
+  }
+
+  .photo-duo-container::after {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+  }
+
+  .photo-duo-left,
+  .photo-duo-right {
+    width: 44%;
+  }
+
+  .photo-duo-left img,
+  .photo-duo-right img {
+    border-width: 4px;
+  }
+
+  .photo-duo-caption {
+    font-size: 0.75rem;
+  }
+}

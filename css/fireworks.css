@@ -1,0 +1,77 @@
+/* ========== fireworks.css - 烟花相关样式 ========== */
+
+/* 烟花画布在 main.css 中已定义基础样式 */
+
+/* 烟花启动按钮（开场） */
+.fireworks-trigger {
+  position: relative;
+  z-index: 3;
+  margin-top: 2rem;
+  opacity: 0;
+  animation: fadeInUp 1s var(--ease-out) 6s forwards;
+}
+
+.fireworks-btn {
+  background: transparent;
+  border: 1.5px solid var(--rose);
+  color: var(--rose);
+  padding: 12px 36px;
+  border-radius: 30px;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.4s var(--ease-soft);
+}
+
+.fireworks-btn:hover {
+  background: var(--rose);
+  color: white;
+  box-shadow: 0 0 30px rgba(232, 180, 184, 0.4);
+}
+
+/* 烟花结束过渡 */
+.fireworks-fade-out {
+  animation: fireworksFadeOut 1.5s var(--ease-out) forwards;
+}
+
+@keyframes fireworksFadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; pointer-events: none; }
+}
+
+/* 开场进入回忆的过渡遮罩 */
+.scene-transition {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-dark);
+  z-index: 998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s var(--ease-out);
+}
+
+.scene-transition.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* 烟花粒子环境光晕 */
+.fireworks-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 60%, rgba(232, 180, 184, 0.08) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 2s var(--ease-out);
+}
+
+.fireworks-glow.active {
+  opacity: 1;
+}
+
+/* 烟花模式：降低亮度让烟花更突出 */
+.part-opening.fireworks-active {
+  background: #050508;
+}
