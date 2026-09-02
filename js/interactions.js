@@ -141,7 +141,7 @@ var InteractionsModule = (function() {
 
       var img = document.createElement('img');
       img.className = 'lazy-img';
-      img.src = photo.image;
+      img.src = encodeURI(photo.image);
       img.alt = photo.archiveTitle || '';
       img.onload = function() { img.classList.add('loaded'); };
       img.onerror = function() {

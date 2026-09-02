@@ -44,7 +44,7 @@ var MainApp = (function() {
 
     // 初始化各模块
     if (window.PhotosModule) PhotosModule.init();
-    if (window.MusicModule) MusicModule.init();
+    if (window.MusicPlayer) MusicPlayer.init();
     if (window.BirthdayModule) BirthdayModule.init();
     if (window.InteractionsModule) InteractionsModule.init();
 
@@ -224,7 +224,7 @@ var MainApp = (function() {
                 photoWrap.style.cssText = 'margin: 2rem auto 0; max-width: 320px; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(232,180,184,0.3), 0 4px 16px rgba(0,0,0,0.2); opacity: 0; transform: translateY(30px) scale(0.9); transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);';
 
                 var img = document.createElement('img');
-                img.src = openingPhoto;
+                img.src = encodeURI(openingPhoto);
                 img.style.cssText = 'width: 100%; display: block; border-radius: 16px;';
                 img.onload = function() {
                   requestAnimationFrame(function() {

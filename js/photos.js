@@ -385,7 +385,7 @@ var PhotosModule = (function() {
   function createLazyImage(photo) {
     var img = document.createElement('img');
     img.className = 'lazy-img loaded';
-    img.src = photo.image;
+    img.src = encodeURI(photo.image);
     img.alt = photo.caption || '';
 
     img.onerror = function() {

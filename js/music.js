@@ -46,7 +46,7 @@
     for (var key in MUSIC_FILES) {
       if (MUSIC_FILES.hasOwnProperty(key)) {
         var audio = new Audio();
-        audio.src = MUSIC_FILES[key].src;
+        audio.src = encodeURI(MUSIC_FILES[key].src);
         audio.loop = true;
         audio.volume = 0;
         audio.preload = 'auto';
