@@ -381,28 +381,20 @@ var PhotosModule = (function() {
     return item;
   }
 
-  // ========== 创建懒加载图片 ==========
+  // ========== 创建图片（直接加载，不用懒加载） ==========
   function createLazyImage(photo) {
     var img = document.createElement('img');
-    img.className = 'lazy-img';
-    img.dataset.src = photo.image;
+    img.className = 'lazy-img loaded';
+    img.src = photo.image;
     img.alt = photo.caption || '';
-    img.loading = 'lazy';
-
-    img.onload = function() {
-      img.classList.add('loaded');
-    };
 
     img.onerror = function() {
+      img.style.display = 'none';
       var placeholder = createPlaceholder(photo);
-      img.parentNode.replaceChild(placeholder, img);
+      if (img.parentNode) {
+        img.parentNode.appendChild(placeholder);
+      }
     };
-
-    if (imageObserver) {
-      imageObserver.observe(img);
-    } else {
-      img.src = photo.image;
-    }
 
     return img;
   }
@@ -411,22 +403,13 @@ var PhotosModule = (function() {
   function createPlaceholder(photo) {
     var div = document.createElement('div');
     div.className = 'photo-placeholder';
-
-    var filename = photo.image.split('/').pop() || photo.image;
+    div.style.cssText = 'padding:20px;background:rgba(232,180,184,0.1);border:2px dashed rgba(232,180,184,0.4);border-radius:12px;text-align:center;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;';
 
     var nameSpan = document.createElement('div');
     nameSpan.className = 'filename';
-    nameSpan.textContent = filename;
+    nameSpan.style.cssText = 'font-size:14px;color:#e8848c;word-break:break-all;';
+    nameSpan.textContent = '找不到: ' + photo.image;
     div.appendChild(nameSpan);
-
-    if (photo.caption) {
-      var cap = document.createElement('div');
-      cap.style.marginTop = '8px';
-      cap.style.fontSize = '12px';
-      cap.style.color = 'var(--text-muted)';
-      cap.textContent = photo.caption;
-      div.appendChild(cap);
-    }
 
     return div;
   }
