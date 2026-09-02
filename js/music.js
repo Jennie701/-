@@ -1,6 +1,6 @@
 /**
  * music.js
- * 多轨音乐播放器
+ * 多轨音乐播放器（真实音频文件版）
  * 支持按阶段切换音乐、交叉淡入淡出、片段播放
  */
 
@@ -11,31 +11,47 @@
     currentTrack: null,
     audioElements: {},
     volume: 0.5,
-    userInitiated: false,  // 用户是否主动点击过播放
-    fadeTime: 1500         // 交叉淡入淡出时长 ms
+    userInitiated: false,
+    fadeTime: 1500
   };
 
-  // ========== 初始化 ==========
-  function init() {
-    if (typeof MUSIC_CONFIG === 'undefined' || !MUSIC_CONFIG.enabled) {
-      return;
-    }
+  var MUSIC_FILES = {
+    birthday: { src: 'audio/birthday-song.mp3', name: '生日歌', volume: 0.6 },
+    childhood: { src: 'audio/we-met-before.mp3', name: '我们好像在哪里见过', volume: 0.5, startTime: 0, duration: 20 },
+    main: { src: 'audio/yu-jian.mp3', name: '遇见 - 孙燕姿', volume: 0.4 }
+  };
 
+  var STAGE_MUSIC = {
+    'childhood': 'childhood',
+    'highschool': 'main',
+    'pandemic': 'main',
+    'graduation': 'main',
+    'university': 'main',
+    'archive': 'main',
+    'mimi': 'main',
+    'daily': 'main',
+    'chengdu': 'main',
+    'beijing': 'main',
+    'changzhou': 'main',
+    'chat': 'main',
+    'wish': 'main',
+    'letter': 'main',
+    'future': 'main'
+  };
+
+  function init() {
     state.enabled = true;
 
     // 预加载所有音频
-    var tracks = MUSIC_CONFIG.tracks;
-    for (var key in tracks) {
-      if (tracks.hasOwnProperty(key)) {
+    for (var key in MUSIC_FILES) {
+      if (MUSIC_FILES.hasOwnProperty(key)) {
         var audio = new Audio();
-        audio.src = tracks[key].src;
+        audio.src = MUSIC_FILES[key].src;
         audio.loop = true;
         audio.volume = 0;
         audio.preload = 'auto';
-        audio.crossOrigin = 'anonymous';
         state.audioElements[key] = audio;
 
-        // 错误处理：文件不存在时静默跳过
         audio.addEventListener('error', function() {
           console.warn('音乐文件加载失败:', this.src);
         });
@@ -46,7 +62,6 @@
     setupStageSwitching();
   }
 
-  // ========== 创建播放器UI ==========
   function createPlayerUI() {
     var player = document.createElement('div');
     player.className = 'music-player';
@@ -72,7 +87,6 @@
       if (state.isPlaying) {
         pauseAll();
       } else {
-        // 从当前位置开始播放
         var track = state.currentTrack || 'main';
         playTrack(track);
       }
@@ -83,47 +97,37 @@
       if (state.isPlaying && state.currentTrack) {
         var audio = state.audioElements[state.currentTrack];
         if (audio) {
-          var trackConfig = MUSIC_CONFIG.tracks[state.currentTrack];
-          audio.volume = state.volume * (trackConfig.volume || 0.5);
+          var config = MUSIC_FILES[state.currentTrack];
+          audio.volume = state.volume * (config.volume || 0.5);
         }
       }
     });
   }
 
-  // ========== 播放指定曲目 ==========
-  function playTrack(trackName, options) {
+  function playTrack(trackName) {
     if (!state.enabled || !state.userInitiated) return;
     if (!state.audioElements[trackName]) return;
 
-    options = options || {};
-    var trackConfig = MUSIC_CONFIG.tracks[trackName];
-    var newAudio = state.audioElements[trackName];
-
-    // 如果已经在播放这首，不处理
     if (state.currentTrack === trackName && state.isPlaying) return;
 
-    // 淡出当前曲目
+    // 淡出当前
     if (state.currentTrack && state.isPlaying) {
       fadeOut(state.currentTrack, state.fadeTime);
     }
 
+    var config = MUSIC_FILES[trackName];
+    var newAudio = state.audioElements[trackName];
+
     // 设置起始时间
-    if (trackConfig.startTime !== undefined) {
-      try {
-        newAudio.currentTime = trackConfig.startTime;
-      } catch(e) {}
-    } else if (options.startTime !== undefined) {
-      try {
-        newAudio.currentTime = options.startTime;
-      } catch(e) {}
+    if (config.startTime !== undefined) {
+      try { newAudio.currentTime = config.startTime; } catch(e) {}
     }
 
-    // 淡入新曲目
     state.currentTrack = trackName;
     state.isPlaying = true;
     updateUI(trackName);
 
-    var targetVolume = state.volume * (trackConfig.volume || 0.5);
+    var targetVolume = state.volume * (config.volume || 0.5);
     newAudio.volume = 0;
 
     var playPromise = newAudio.play();
@@ -137,22 +141,16 @@
 
     fadeIn(trackName, state.fadeTime, targetVolume);
 
-    // 片段模式：duration秒后淡出并切换到main
-    if (trackConfig.duration && trackConfig.duration > 0) {
+    // 片段模式
+    if (config.duration && config.duration > 0) {
       setTimeout(function() {
         if (state.currentTrack === trackName && state.isPlaying) {
-          switchToMain();
+          playTrack('main');
         }
-      }, trackConfig.duration * 1000 - state.fadeTime);
+      }, config.duration * 1000 - state.fadeTime);
     }
   }
 
-  // ========== 切换到main曲目 ==========
-  function switchToMain() {
-    playTrack('main');
-  }
-
-  // ========== 暂停所有 ==========
   function pauseAll() {
     state.isPlaying = false;
     for (var key in state.audioElements) {
@@ -165,21 +163,16 @@
     updateUI(null);
   }
 
-  // ========== 淡入 ==========
   function fadeIn(trackName, duration, targetVolume) {
     var audio = state.audioElements[trackName];
     if (!audio) return;
 
     var startTime = Date.now();
-    var startVolume = 0;
-
     function tick() {
       var elapsed = Date.now() - startTime;
       var progress = Math.min(elapsed / duration, 1);
-      // easeOutQuad
       progress = 1 - (1 - progress) * (1 - progress);
-      audio.volume = startVolume + (targetVolume - startVolume) * progress;
-
+      audio.volume = targetVolume * progress;
       if (progress < 1 && state.isPlaying && state.currentTrack === trackName) {
         requestAnimationFrame(tick);
       }
@@ -187,21 +180,17 @@
     requestAnimationFrame(tick);
   }
 
-  // ========== 淡出 ==========
   function fadeOut(trackName, duration) {
     var audio = state.audioElements[trackName];
     if (!audio) return;
 
     var startTime = Date.now();
     var startVolume = audio.volume;
-
     function tick() {
       var elapsed = Date.now() - startTime;
       var progress = Math.min(elapsed / duration, 1);
-      // easeInQuad
       progress = progress * progress;
       audio.volume = startVolume * (1 - progress);
-
       if (progress < 1) {
         requestAnimationFrame(tick);
       } else {
@@ -212,18 +201,16 @@
     requestAnimationFrame(tick);
   }
 
-  // ========== 更新UI ==========
   function updateUI(trackName) {
     var toggleBtn = document.getElementById('musicToggle');
     var nameEl = document.getElementById('musicName');
-
     if (!toggleBtn || !nameEl) return;
 
     if (state.isPlaying && trackName) {
-      var trackConfig = MUSIC_CONFIG.tracks[trackName];
+      var config = MUSIC_FILES[trackName];
       toggleBtn.classList.add('playing');
       toggleBtn.setAttribute('title', '暂停音乐');
-      nameEl.textContent = trackConfig ? trackConfig.name : '播放中';
+      nameEl.textContent = config ? config.name : '播放中';
     } else {
       toggleBtn.classList.remove('playing');
       toggleBtn.setAttribute('title', '播放音乐');
@@ -231,28 +218,23 @@
     }
   }
 
-  // ========== 按STAGE切换音乐 ==========
   function setupStageSwitching() {
-    // 使用IntersectionObserver监听stage进入视口
     if (!('IntersectionObserver' in window)) return;
 
     var observer = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting && state.isPlaying && state.userInitiated) {
           var stageId = entry.target.getAttribute('data-stage-id');
-          if (stageId && MUSIC_CONFIG.stageMusic && MUSIC_CONFIG.stageMusic[stageId]) {
-            var targetTrack = MUSIC_CONFIG.stageMusic[stageId];
+          if (stageId && STAGE_MUSIC[stageId]) {
+            var targetTrack = STAGE_MUSIC[stageId];
             if (targetTrack !== state.currentTrack) {
               playTrack(targetTrack);
             }
           }
         }
       });
-    }, {
-      threshold: 0.3 // 进入30%时触发
-    });
+    }, { threshold: 0.3 });
 
-    // 等stage渲染完再监听
     setTimeout(function() {
       var stages = document.querySelectorAll('.stage[data-stage-id]');
       stages.forEach(function(stage) {
@@ -261,7 +243,6 @@
     }, 2000);
   }
 
-  // ========== 公开API ==========
   window.MusicPlayer = {
     init: init,
     play: function(trackName) {
@@ -273,15 +254,10 @@
       state.userInitiated = true;
       playTrack('birthday');
     },
-    isPlaying: function() {
-      return state.isPlaying;
-    },
-    getCurrentTrack: function() {
-      return state.currentTrack;
-    }
+    isPlaying: function() { return state.isPlaying; },
+    getCurrentTrack: function() { return state.currentTrack; }
   };
 
-  // 页面加载后初始化
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
