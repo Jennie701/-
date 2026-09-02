@@ -82,7 +82,7 @@ const OPENING_SEQUENCE = [
 ];
 
 // 开场祝福语之后展示的照片
-const OPENING_PHOTO = 'birthday/仙女生日快乐.jpg';
+const OPENING_PHOTO = 'birthday/birthday-girl.jpg';
 
 const OPENING_INPUT = {
   prompt: '请输入你的姓名',
@@ -111,7 +111,7 @@ const STAGES = [
     subtitle: 'CHILDHOOD · 小时候',
     photos: [
       {
-        image: 'childhood/小时候照片.png',
+        image: 'childhood/childhood.png',
         section: 'childhood',
         caption: '',
         displayMode: 'hero-vintage',
@@ -139,21 +139,21 @@ const STAGES = [
     subtitle: 'HIGH SCHOOL · 高中',
     photos: [
       {
-        image: 'highschool/高中最有氛围的照片.jpg',
+        image: 'highschool/hs1.jpg',
         section: 'highschool',
         caption: '',
         displayMode: 'hero',
         order: 1
       },
       {
-        image: 'highschool/成人礼.jpg',
+        image: 'highschool/hs2.jpg',
         section: 'highschool',
         caption: '',
         displayMode: 'normal',
         order: 2
       },
       {
-        image: 'highschool/毕业合照.jpg',
+        image: 'highschool/hs3.jpg',
         section: 'highschool',
         caption: '',
         displayMode: 'fullscreen',
@@ -174,14 +174,14 @@ const STAGES = [
     subtitle: '',
     photos: [
       {
-        image: 'pandemic/疫情照片1.jpg',
+        image: 'pandemic/p1.jpg',
         section: 'pandemic',
         caption: '',
         displayMode: 'polaroid',
         order: 1
       },
       {
-        image: 'pandemic/疫情照片2.jpg',
+        image: 'pandemic/p2.jpg',
         section: 'pandemic',
         caption: '',
         displayMode: 'polaroid',
@@ -205,7 +205,7 @@ const STAGES = [
     subtitle: '',
     photos: [
       {
-        image: 'highschool/毕业合照新.jpg',
+        image: 'highschool/grad.jpg',
         section: 'graduation',
         caption: '',
         displayMode: 'fullscreen',
@@ -230,21 +230,21 @@ const STAGES = [
     subtitle: 'UNIVERSITY · 大学',
     photos: [
       {
-        image: 'university/第一个寒假.jpg',
+        image: 'university/u1.jpg',
         section: 'university',
         caption: '',
         displayMode: 'hero',
         order: 1
       },
       {
-        image: 'university/大学照片1.jpg',
+        image: 'university/u2.jpg',
         section: 'university',
         caption: '',
         displayMode: 'duo-left',
         order: 2
       },
       {
-        image: 'university/大学照片2.jpg',
+        image: 'university/u3.jpg',
         section: 'university',
         caption: '',
         displayMode: 'duo-right',
@@ -268,7 +268,7 @@ const STAGES = [
     subtitle: 'ARCHIVED FILE · 机密档案',
     photos: [
       {
-        image: 'memories/深夜搞怪.jpg',
+        image: 'memories/m1.jpg',
         section: 'archive',
         caption: '档案 #001 深夜搞怪',
         displayMode: 'archive',
@@ -277,7 +277,7 @@ const STAGES = [
         archiveTitle: '深夜搞怪'
       },
       {
-        image: 'memories/豆包爆炸头限定款.jpg',
+        image: 'memories/m2.jpg',
         section: 'archive',
         caption: '档案 #002 豆包爆炸头限定款',
         displayMode: 'archive',
@@ -300,7 +300,7 @@ const STAGES = [
     subtitle: '',
     photos: [
       {
-        image: 'memories/你和咪咪.jpg',
+        image: 'memories/mimi.jpg',
         section: 'mimi',
         caption: '',
         displayMode: 'hero',
@@ -326,7 +326,7 @@ const STAGES = [
         order: 1
       },
       {
-        image: 'memories/不知何时拍的.jpg',
+        image: 'memories/m3.jpg',
         section: 'daily',
         caption: '',
         displayMode: 'polaroid',
@@ -356,28 +356,28 @@ const STAGES = [
     subtitle: 'SOMEWHERE WE WENT · 成都',
     photos: [
       {
-        image: 'chengdu/微信图片_20260901091928_155_33.jpg',
+        image: 'chengdu/cd1.jpg',
         section: 'chengdu',
         caption: '',
         displayMode: 'gallery',
         order: 1
       },
       {
-        image: 'chengdu/成都旅行.jpg',
+        image: 'chengdu/cd2.jpg',
         section: 'chengdu',
         caption: '',
         displayMode: 'gallery',
         order: 2
       },
       {
-        image: 'chengdu/成都旅行第二弹.jpg',
+        image: 'chengdu/cd3.jpg',
         section: 'chengdu',
         caption: '',
         displayMode: 'gallery',
         order: 3
       },
       {
-        image: 'chengdu/成都额外照片.png',
+        image: 'chengdu/cd4.png',
         section: 'chengdu',
         caption: '',
         displayMode: 'gallery',
@@ -396,7 +396,7 @@ const STAGES = [
     subtitle: 'ANOTHER MEMORY · 北京',
     photos: [
       {
-        image: 'beijing/微信图片_20260901091928_147_33.jpg',
+        image: 'beijing/bj1.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
@@ -404,35 +404,35 @@ const STAGES = [
         isMain: true
       },
       {
-        image: 'beijing/微信图片_20260901091928_148_33.jpg',
+        image: 'beijing/bj2.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
         order: 2
       },
       {
-        image: 'beijing/微信图片_20260901091928_149_33.jpg',
+        image: 'beijing/bj3.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
         order: 3
       },
       {
-        image: 'beijing/微信图片_20260901091928_150_33.jpg',
+        image: 'beijing/bj4.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
         order: 4
       },
       {
-        image: 'beijing/微信图片_20260901091928_151_33.jpg',
+        image: 'beijing/bj5.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
         order: 5
       },
       {
-        image: 'beijing/微信图片_20260901091928_152_33.jpg',
+        image: 'beijing/bj6.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
@@ -448,14 +448,14 @@ const STAGES = [
     subtitle: '',
     photos: [
       {
-        image: 'changzhou/微信图片_20260901091928_153_33.jpg',
+        image: 'changzhou/cz1.jpg',
         section: 'changzhou',
         caption: '',
         displayMode: 'polaroid',
         order: 1
       },
       {
-        image: 'changzhou/微信图片_20260901091928_154_33.jpg',
+        image: 'changzhou/cz2.jpg',
         section: 'changzhou',
         caption: '',
         displayMode: 'polaroid',
@@ -493,7 +493,7 @@ const CHAT_ENDING_TEXT = '就这样，听我叭叭叭了三年。';
 
 // ========== PART 03: 吹蜡烛交互 ==========
 const CANDLE_CONFIG = {
-  photo: 'birthday/仙女生日快乐.jpg',
+  photo: 'birthday/birthday-girl.jpg',
   number: 20,
   prompts: [
     '好，现在闭上眼睛。',
