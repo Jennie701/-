@@ -19,7 +19,7 @@ const SITE_CONFIG = {
 };
 
 // ========== 音乐配置 ==========
-// 把你合法拥有的音乐文件放到 assets/audio/ 目录下
+// 把你合法拥有的音乐文件放到 audio/ 目录下
 // 然后修改下面的文件名即可
 const MUSIC_CONFIG = {
   // 是否启用音乐
@@ -30,13 +30,13 @@ const MUSIC_CONFIG = {
   tracks: {
     // PART 01 开场：生日歌（出现"祝炸鸡生日快乐"时播放）
     birthday: {
-      src: 'assets/audio/birthday-song.mp3',
+      src: 'audio/birthday-song.mp3',
       name: '生日歌',
       volume: 0.6
     },
     // 小时候STAGE：我们好像在哪里见过 片段
     childhood: {
-      src: 'assets/audio/we-met-before.mp3',
+      src: 'audio/we-met-before.mp3',
       name: '我们好像在哪里见过',
       volume: 0.5,
       // 从第几秒开始播放（片段模式）
@@ -46,7 +46,7 @@ const MUSIC_CONFIG = {
     },
     // 其余部分：遇见 - 孙燕姿
     main: {
-      src: 'assets/audio/yu-jian.mp3',
+      src: 'audio/yu-jian.mp3',
       name: '遇见 - 孙燕姿',
       volume: 0.4
     }
@@ -82,7 +82,7 @@ const OPENING_SEQUENCE = [
 ];
 
 // 开场祝福语之后展示的照片
-const OPENING_PHOTO = 'assets/photos/birthday/仙女生日快乐.jpg';
+const OPENING_PHOTO = 'birthday/仙女生日快乐.jpg';
 
 const OPENING_INPUT = {
   prompt: '请输入你的姓名',
@@ -111,7 +111,7 @@ const STAGES = [
     subtitle: 'CHILDHOOD · 小时候',
     photos: [
       {
-        image: 'assets/photos/childhood/小时候照片.png',
+        image: 'childhood/小时候照片.png',
         section: 'childhood',
         caption: '',
         displayMode: 'hero-vintage',
@@ -139,21 +139,21 @@ const STAGES = [
     subtitle: 'HIGH SCHOOL · 高中',
     photos: [
       {
-        image: 'assets/photos/highschool/高中最有氛围的照片.jpg',
+        image: 'highschool/高中最有氛围的照片.jpg',
         section: 'highschool',
         caption: '',
         displayMode: 'hero',
         order: 1
       },
       {
-        image: 'assets/photos/highschool/成人礼.jpg',
+        image: 'highschool/成人礼.jpg',
         section: 'highschool',
         caption: '',
         displayMode: 'normal',
         order: 2
       },
       {
-        image: 'assets/photos/highschool/毕业合照.jpg',
+        image: 'highschool/毕业合照.jpg',
         section: 'highschool',
         caption: '',
         displayMode: 'fullscreen',
@@ -174,14 +174,14 @@ const STAGES = [
     subtitle: '',
     photos: [
       {
-        image: 'assets/photos/pandemic/疫情照片1.jpg',
+        image: 'pandemic/疫情照片1.jpg',
         section: 'pandemic',
         caption: '',
         displayMode: 'polaroid',
         order: 1
       },
       {
-        image: 'assets/photos/pandemic/疫情照片2.jpg',
+        image: 'pandemic/疫情照片2.jpg',
         section: 'pandemic',
         caption: '',
         displayMode: 'polaroid',
@@ -205,7 +205,7 @@ const STAGES = [
     subtitle: '',
     photos: [
       {
-        image: 'assets/photos/highschool/毕业合照新.jpg',
+        image: 'highschool/毕业合照新.jpg',
         section: 'graduation',
         caption: '',
         displayMode: 'fullscreen',
@@ -230,21 +230,21 @@ const STAGES = [
     subtitle: 'UNIVERSITY · 大学',
     photos: [
       {
-        image: 'assets/photos/university/第一个寒假.jpg',
+        image: 'university/第一个寒假.jpg',
         section: 'university',
         caption: '',
         displayMode: 'hero',
         order: 1
       },
       {
-        image: 'assets/photos/university/大学照片1.jpg',
+        image: 'university/大学照片1.jpg',
         section: 'university',
         caption: '',
         displayMode: 'duo-left',
         order: 2
       },
       {
-        image: 'assets/photos/university/大学照片2.jpg',
+        image: 'university/大学照片2.jpg',
         section: 'university',
         caption: '',
         displayMode: 'duo-right',
@@ -268,7 +268,7 @@ const STAGES = [
     subtitle: 'ARCHIVED FILE · 机密档案',
     photos: [
       {
-        image: 'assets/photos/memories/深夜搞怪.jpg',
+        image: 'memories/深夜搞怪.jpg',
         section: 'archive',
         caption: '档案 #001 深夜搞怪',
         displayMode: 'archive',
@@ -277,7 +277,7 @@ const STAGES = [
         archiveTitle: '深夜搞怪'
       },
       {
-        image: 'assets/photos/memories/豆包爆炸头限定款.jpg',
+        image: 'memories/豆包爆炸头限定款.jpg',
         section: 'archive',
         caption: '档案 #002 豆包爆炸头限定款',
         displayMode: 'archive',
@@ -300,7 +300,7 @@ const STAGES = [
     subtitle: '',
     photos: [
       {
-        image: 'assets/photos/memories/你和咪咪.jpg',
+        image: 'memories/你和咪咪.jpg',
         section: 'mimi',
         caption: '',
         displayMode: 'hero',
@@ -319,14 +319,14 @@ const STAGES = [
     subtitle: 'EVERYDAY · 日常',
     photos: [
       {
-        image: 'assets/photos/memories/eat.jpg',
+        image: 'memories/eat.jpg',
         section: 'daily',
         caption: '',
         displayMode: 'polaroid',
         order: 1
       },
       {
-        image: 'assets/photos/memories/不知何时拍的.jpg',
+        image: 'memories/不知何时拍的.jpg',
         section: 'daily',
         caption: '',
         displayMode: 'polaroid',
@@ -356,28 +356,28 @@ const STAGES = [
     subtitle: 'SOMEWHERE WE WENT · 成都',
     photos: [
       {
-        image: 'assets/photos/chengdu/微信图片_20260901091928_155_33.jpg',
+        image: 'chengdu/微信图片_20260901091928_155_33.jpg',
         section: 'chengdu',
         caption: '',
         displayMode: 'gallery',
         order: 1
       },
       {
-        image: 'assets/photos/chengdu/成都旅行.jpg',
+        image: 'chengdu/成都旅行.jpg',
         section: 'chengdu',
         caption: '',
         displayMode: 'gallery',
         order: 2
       },
       {
-        image: 'assets/photos/chengdu/成都旅行第二弹.jpg',
+        image: 'chengdu/成都旅行第二弹.jpg',
         section: 'chengdu',
         caption: '',
         displayMode: 'gallery',
         order: 3
       },
       {
-        image: 'assets/photos/chengdu/成都额外照片.png',
+        image: 'chengdu/成都额外照片.png',
         section: 'chengdu',
         caption: '',
         displayMode: 'gallery',
@@ -396,7 +396,7 @@ const STAGES = [
     subtitle: 'ANOTHER MEMORY · 北京',
     photos: [
       {
-        image: 'assets/photos/beijing/微信图片_20260901091928_147_33.jpg',
+        image: 'beijing/微信图片_20260901091928_147_33.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
@@ -404,35 +404,35 @@ const STAGES = [
         isMain: true
       },
       {
-        image: 'assets/photos/beijing/微信图片_20260901091928_148_33.jpg',
+        image: 'beijing/微信图片_20260901091928_148_33.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
         order: 2
       },
       {
-        image: 'assets/photos/beijing/微信图片_20260901091928_149_33.jpg',
+        image: 'beijing/微信图片_20260901091928_149_33.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
         order: 3
       },
       {
-        image: 'assets/photos/beijing/微信图片_20260901091928_150_33.jpg',
+        image: 'beijing/微信图片_20260901091928_150_33.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
         order: 4
       },
       {
-        image: 'assets/photos/beijing/微信图片_20260901091928_151_33.jpg',
+        image: 'beijing/微信图片_20260901091928_151_33.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
         order: 5
       },
       {
-        image: 'assets/photos/beijing/微信图片_20260901091928_152_33.jpg',
+        image: 'beijing/微信图片_20260901091928_152_33.jpg',
         section: 'beijing',
         caption: '',
         displayMode: 'polaroid',
@@ -448,14 +448,14 @@ const STAGES = [
     subtitle: '',
     photos: [
       {
-        image: 'assets/photos/changzhou/微信图片_20260901091928_153_33.jpg',
+        image: 'changzhou/微信图片_20260901091928_153_33.jpg',
         section: 'changzhou',
         caption: '',
         displayMode: 'polaroid',
         order: 1
       },
       {
-        image: 'assets/photos/changzhou/微信图片_20260901091928_154_33.jpg',
+        image: 'changzhou/微信图片_20260901091928_154_33.jpg',
         section: 'changzhou',
         caption: '',
         displayMode: 'polaroid',
@@ -493,7 +493,7 @@ const CHAT_ENDING_TEXT = '就这样，听我叭叭叭了三年。';
 
 // ========== PART 03: 吹蜡烛交互 ==========
 const CANDLE_CONFIG = {
-  photo: 'assets/photos/birthday/仙女生日快乐.jpg',
+  photo: 'birthday/仙女生日快乐.jpg',
   number: 20,
   prompts: [
     '好，现在闭上眼睛。',
@@ -636,8 +636,8 @@ const MUSIC_CONFIG = {
   tracks: [
     {
       title: '待替换 - 请放入合法音乐',
-      artist: '将音乐文件放到 assets/audio/ 目录',
-      src: 'assets/audio/placeholder.mp3'
+      artist: '将音乐文件放到 audio/ 目录',
+      src: 'audio/placeholder.mp3'
     }
   ],
   autoplay: false,
