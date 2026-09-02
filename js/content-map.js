@@ -631,20 +631,6 @@ const ENDING_CONFIG = {
   ]
 };
 
-// ========== 音乐配置 ==========
-const MUSIC_CONFIG = {
-  tracks: [
-    {
-      title: '待替换 - 请放入合法音乐',
-      artist: '将音乐文件放到 audio/ 目录',
-      src: 'audio/placeholder.mp3'
-    }
-  ],
-  autoplay: false,
-  loop: true,
-  volume: 0.6
-};
-
 // ========== 导出 ==========
 if (typeof window !== 'undefined') {
   window.CONTENT_MAP = {
